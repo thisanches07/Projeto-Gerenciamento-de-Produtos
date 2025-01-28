@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoAssembler } from 'src/modules/produtos/assembler/produto-assembler';
 import { CriarProdutoDto } from 'src/types/dtos/produto.insert.dto';
@@ -35,7 +39,24 @@ export class ProdutoService {
     return 'editarProduto';
   }
 
-  deletarProduto(): string {
-    return 'deletarProduto';
+  private async getProdutoById(id: string): Promise<Produto> {
+    const produto = await this.produtoRepository.findOne({
+      where: { id: parseInt(id) },
+    });
+    if (!produto) {
+      throw new NotFoundException('Produto não encontrado');
+    }
+    return produto;
+  }
+
+  async deletarProduto(
+    id: string,
+  ): Promise<{ sucesso: boolean; message: string }> {
+    await this.getProdutoById(id);
+    const { affected } = await this.produtoRepository.delete(id);
+
+    return affected > 0
+      ? { sucesso: true, message: 'Produto deletado com sucesso.' }
+      : { sucesso: false, message: 'Falha ao tentar deletar o produto.' };
   }
 }
