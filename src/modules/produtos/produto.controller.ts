@@ -1,3 +1,6 @@
+import { CriarProdutoDto } from '@app/types/dtos/produto.insert.dto';
+import { ProdutoResponseDto } from '@app/types/dtos/produto.response.dto';
+import { EditarProdutoDto } from '@app/types/dtos/produto.update.dto';
 import {
   Body,
   Controller,
@@ -7,9 +10,6 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { CriarProdutoDto } from 'src/types/dtos/produto.insert.dto';
-import { ProdutoResponseDto } from 'src/types/dtos/produto.response.dto';
-import { EditarProdutoDto } from 'src/types/dtos/produto.update.dto';
 import { ProdutoService } from './produto.service';
 
 @Controller('produtos')

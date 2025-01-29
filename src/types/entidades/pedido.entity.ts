@@ -1,5 +1,5 @@
-import { ProdutoPedido } from 'src/types/entidades/produto-pedido.entity';
-import { PedidoStatus } from 'src/types/enum/pedido-status.enum';
+import { ProdutoPedido } from '@app/types/entidades/produto-pedido.entity';
+import { PedidoStatus } from '@app/types/enum/pedido-status.enum';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

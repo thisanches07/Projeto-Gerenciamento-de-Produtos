@@ -1,5 +1,5 @@
-import { Pedido } from 'src/types/entidades/pedido.entity';
-import { Produto } from 'src/types/entidades/produto.entity';
+import { Pedido } from '@app/types/entidades/pedido.entity';
+import { Produto } from '@app/types/entidades/produto.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

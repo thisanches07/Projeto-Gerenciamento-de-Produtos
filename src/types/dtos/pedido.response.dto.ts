@@ -1,5 +1,5 @@
-import { ProdutoResponseDto } from 'src/types/dtos/produto.response.dto';
-import { PedidoStatus } from 'src/types/enum/pedido-status.enum';
+import { ProdutoResponseDto } from '@app/types/dtos/produto.response.dto';
+import { PedidoStatus } from '@app/types/enum/pedido-status.enum';
 
 class ProdutoPedidoResponseDto {
   produto: ProdutoResponseDto;

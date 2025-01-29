@@ -1,10 +1,10 @@
+import { Pedido } from '@app/types/entidades/pedido.entity';
+import { ProdutoPedido } from '@app/types/entidades/produto-pedido.entity';
+import { PedidoController } from '@modules/pedidos/pedido.controller';
+import { PedidoService } from '@modules/pedidos/pedido.service';
+import { ProdutoModule } from '@modules/produtos/produto.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProdutoModule } from 'src/modules/produtos/produto.module';
-import { Pedido } from 'src/types/entidades/pedido.entity';
-import { ProdutoPedido } from 'src/types/entidades/produto-pedido.entity';
-import { PedidoController } from './pedido.controller';
-import { PedidoService } from './pedido.service';
 
 @Module({
   imports: [

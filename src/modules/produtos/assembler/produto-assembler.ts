@@ -1,5 +1,5 @@
-import { ProdutoResponseDto } from 'src/types/dtos/produto.response.dto';
-import { Produto } from 'src/types/entidades/produto.entity';
+import { ProdutoResponseDto } from '@app/types/dtos/produto.response.dto';
+import { Produto } from '@app/types/entidades/produto.entity';
 
 export class ProdutoAssembler {
   static assembleProdutoResponse(produto: Produto): ProdutoResponseDto {

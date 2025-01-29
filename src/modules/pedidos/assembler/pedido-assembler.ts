@@ -1,7 +1,7 @@
-import { ProdutoAssembler } from 'src/modules/produtos/assembler/produto-assembler';
-import { PedidoResponseDto } from 'src/types/dtos/pedido.response.dto';
-import { Pedido } from 'src/types/entidades/pedido.entity';
-import { ProdutoPedido } from 'src/types/entidades/produto-pedido.entity';
+import { PedidoResponseDto } from '@app/types/dtos/pedido.response.dto';
+import { Pedido } from '@app/types/entidades/pedido.entity';
+import { ProdutoPedido } from '@app/types/entidades/produto-pedido.entity';
+import { ProdutoAssembler } from '@modules/produtos/assembler/produto-assembler';
 
 export class PedidoAssembler {
   private static assembleProdutoPedido(produtosPedido: ProdutoPedido[]) {

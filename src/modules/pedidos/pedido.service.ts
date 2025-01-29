@@ -1,16 +1,16 @@
+import { CriarPedidoDto } from '@app/types/dtos/pedido.insert.dto';
+import { PedidoResponseDto } from '@app/types/dtos/pedido.response.dto';
+import { Pedido } from '@app/types/entidades/pedido.entity';
+import { ProdutoPedido } from '@app/types/entidades/produto-pedido.entity';
+import { PedidoStatus } from '@app/types/enum/pedido-status.enum';
+import { PedidoAssembler } from '@modules/pedidos/assembler/pedido-assembler';
+import { ProdutoService } from '@modules/produtos/produto.service';
 import {
   BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PedidoAssembler } from 'src/modules/pedidos/assembler/pedido-assembler';
-import { ProdutoService } from 'src/modules/produtos/produto.service';
-import { CriarPedidoDto } from 'src/types/dtos/pedido.insert.dto';
-import { PedidoResponseDto } from 'src/types/dtos/pedido.response.dto';
-import { Pedido } from 'src/types/entidades/pedido.entity';
-import { ProdutoPedido } from 'src/types/entidades/produto-pedido.entity';
-import { PedidoStatus } from 'src/types/enum/pedido-status.enum';
 import { Repository } from 'typeorm';
 
 @Injectable()

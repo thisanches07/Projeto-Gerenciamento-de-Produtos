@@ -1,7 +1,7 @@
+import { CriarPedidoDto } from '@app/types/dtos/pedido.insert.dto';
+import { PedidoResponseDto } from '@app/types/dtos/pedido.response.dto';
+import { PedidoService } from '@modules/pedidos/pedido.service';
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import { PedidoService } from 'src/modules/pedidos/pedido.service';
-import { CriarPedidoDto } from 'src/types/dtos/pedido.insert.dto';
-import { PedidoResponseDto } from 'src/types/dtos/pedido.response.dto';
 
 @Controller('pedidos')
 export class PedidoController {
