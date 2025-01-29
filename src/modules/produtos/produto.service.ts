@@ -19,10 +19,7 @@ export class ProdutoService {
   ) {}
   async listarProdutos(): Promise<ProdutoResponseDto[]> {
     const produtos = await this.produtoRepository.find();
-    const produtosDto = produtos.map((produto) =>
-      ProdutoAssembler.assembleCriarProdutoResponse(produto),
-    );
-    return produtosDto;
+    return ProdutoAssembler.assembleProdutosResponse(produtos);
   }
 
   async criarProduto(data: CriarProdutoDto): Promise<ProdutoResponseDto> {
@@ -32,7 +29,7 @@ export class ProdutoService {
       throw new BadRequestException('Produto não foi criado');
     }
 
-    return ProdutoAssembler.assembleCriarProdutoResponse(produtoSalvo);
+    return ProdutoAssembler.assembleProdutoResponse(produtoSalvo);
   }
 
   async editarProduto(
@@ -42,7 +39,7 @@ export class ProdutoService {
     await this.getProdutoById(id);
     await this.produtoRepository.update(id, data);
     const produtoAtualizado = await this.getProdutoById(id);
-    return ProdutoAssembler.assembleCriarProdutoResponse(produtoAtualizado);
+    return ProdutoAssembler.assembleProdutoResponse(produtoAtualizado);
   }
 
   private async getProdutoById(id: string): Promise<Produto> {

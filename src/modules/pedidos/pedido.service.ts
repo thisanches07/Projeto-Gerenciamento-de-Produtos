@@ -13,10 +13,7 @@ export class PedidoService {
   ) {}
   async listarPedidos(): Promise<PedidoResponseDto[]> {
     const pedidos = await this.pedidoRepository.find();
-    const pedidosDto = pedidos.map((pedido) =>
-      PedidoAssembler.assemblePedidosResponse(pedido),
-    );
-    return pedidosDto;
+    return PedidoAssembler.assemblePedidosResponse(pedidos);
   }
 
   criarPedido(): string {
