@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Pedido } from 'src/types/entidades/pedido.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Produto {
@@ -19,4 +20,7 @@ export class Produto {
 
   @Column({ type: 'decimal' })
   quantidade_estoque: number;
+
+  @ManyToOne(() => Pedido, (pedido) => pedido.produtos, { nullable: true })
+  pedido: Pedido;
 }
