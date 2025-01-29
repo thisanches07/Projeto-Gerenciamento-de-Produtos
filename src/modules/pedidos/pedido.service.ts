@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PedidoAssembler } from 'src/modules/pedidos/assembler/pedido-assembler';
 import { ProdutoService } from 'src/modules/produtos/produto.service';
@@ -27,7 +31,15 @@ export class PedidoService {
     return PedidoAssembler.assemblePedidosResponse(pedidos);
   }
 
-  async criarPedido(data: CriarPedidoDto): Promise<any> {
+  async listarPedidoById(id: string): Promise<PedidoResponseDto> {
+    const pedido = await this.pedidoRepository.findOne({
+      where: { id: parseInt(id) },
+      relations: ['produtos', 'produtos.produto'],
+    });
+    return PedidoAssembler.assemblePedidoResponse(pedido);
+  }
+
+  async criarPedido(data: CriarPedidoDto): Promise<PedidoResponseDto> {
     const pedido = this.pedidoRepository.create({
       total_pedido: 0,
       status: PedidoStatus.PENDENTE,
@@ -38,10 +50,7 @@ export class PedidoService {
     for (const produtoASerPedido of data.produtos) {
       const { nome, quantidade } = produtoASerPedido;
       const produto = await this.produtoService.listarProdutoByNome(nome);
-      this.produtoService.atualizarQuantidadeDeProdutoPedido(
-        produto,
-        quantidade,
-      );
+      this.produtoService.validarDisponibilidadeDeProduto(produto, quantidade);
 
       const produtoPedido = new ProdutoPedido();
       produtoPedido.produto = produto;
@@ -60,5 +69,30 @@ export class PedidoService {
     });
 
     return PedidoAssembler.assemblePedidoResponse(pedidoComProdutos);
+  }
+
+  async concluirPedido(id: string): Promise<PedidoResponseDto> {
+    const pedido = await this.listarPedidoById(id);
+
+    if (pedido.status !== PedidoStatus.PENDENTE) {
+      throw new BadRequestException('O pedido não está pendente');
+    }
+
+    if (pedido) {
+      for (const produtoPedido of pedido.produtos) {
+        this.produtoService.atualizarQuantidadeDeProdutoPedido(
+          produtoPedido.produto,
+          produtoPedido.quantidade,
+        );
+      }
+    } else {
+      throw new NotFoundException('Pedido não encontrado');
+    }
+
+    await this.pedidoRepository.update(id, {
+      status: PedidoStatus.CONCLUIDO,
+    });
+
+    return await this.listarPedidoById(id);
   }
 }

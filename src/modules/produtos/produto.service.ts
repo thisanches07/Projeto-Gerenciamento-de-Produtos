@@ -62,15 +62,18 @@ export class ProdutoService {
     return ProdutoAssembler.assembleProdutoResponse(produto);
   }
 
-  async atualizarQuantidadeDeProdutoPedido(
-    produto: Produto,
-    quantidade: number,
-  ) {
+  validarDisponibilidadeDeProduto(produto: Produto, quantidade: number) {
     if (produto.quantidade_estoque < quantidade) {
       throw new NotFoundException(
         `O produto ${produto.nome} possui apenas ${produto.quantidade_estoque} em estoque. Quantidade ${quantidade} inválida! `,
       );
     }
+  }
+
+  async atualizarQuantidadeDeProdutoPedido(
+    produto: Produto,
+    quantidade: number,
+  ) {
     await this.produtoRepository.update(produto.id, {
       quantidade_estoque: () => `quantidade_estoque - ${quantidade}`,
     });
