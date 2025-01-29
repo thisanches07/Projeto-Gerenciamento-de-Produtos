@@ -9,7 +9,7 @@ export class ProdutoAssembler {
       categoria: data.categoria,
       preco: data.preco,
       descricao: data.descricao,
-      urlImagem: data.urlImagem,
+      quantidade_estoque: data.quantidade_estoque,
     };
   }
 }

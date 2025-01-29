@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { CriarProdutoDto } from 'src/types/dtos/produto.insert.dto';
 import { ProdutoResponseDto } from 'src/types/dtos/produto.response.dto';
+import { EditarProdutoDto } from 'src/types/dtos/produto.update.dto';
 import { ProdutoService } from './produto.service';
 
 @Controller('produtos')
@@ -27,9 +28,12 @@ export class ProdutoController {
     return await this.service.criarProduto(data);
   }
 
-  @Patch()
-  editarProduto(): string {
-    return this.service.editarProduto();
+  @Patch('/:id')
+  async editarProduto(
+    @Param('id') id: string,
+    @Body() data: EditarProdutoDto,
+  ): Promise<ProdutoResponseDto> {
+    return await this.service.editarProduto(id, data);
   }
 
   @Delete('/:id')

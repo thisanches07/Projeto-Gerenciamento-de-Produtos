@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoAssembler } from 'src/modules/produtos/assembler/produto-assembler';
 import { CriarProdutoDto } from 'src/types/dtos/produto.insert.dto';
 import { ProdutoResponseDto } from 'src/types/dtos/produto.response.dto';
+import { EditarProdutoDto } from 'src/types/dtos/produto.update.dto';
 import { Produto } from 'src/types/entidades/produto.entity';
 import { Repository } from 'typeorm';
 
@@ -30,13 +31,18 @@ export class ProdutoService {
     if (!produtoSalvo) {
       throw new BadRequestException('Produto não foi criado');
     }
-    const produtoDto =
-      ProdutoAssembler.assembleCriarProdutoResponse(produtoSalvo);
-    return produtoDto;
+
+    return ProdutoAssembler.assembleCriarProdutoResponse(produtoSalvo);
   }
 
-  editarProduto(): string {
-    return 'editarProduto';
+  async editarProduto(
+    id: string,
+    data: EditarProdutoDto,
+  ): Promise<ProdutoResponseDto> {
+    await this.getProdutoById(id);
+    await this.produtoRepository.update(id, data);
+    const produtoAtualizado = await this.getProdutoById(id);
+    return ProdutoAssembler.assembleCriarProdutoResponse(produtoAtualizado);
   }
 
   private async getProdutoById(id: string): Promise<Produto> {

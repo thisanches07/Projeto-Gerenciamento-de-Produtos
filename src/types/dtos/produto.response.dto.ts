@@ -17,5 +17,5 @@ export class ProdutoResponseDto {
   descricao: string;
 
   @IsUrl()
-  urlImagem: string;
+  quantidade_estoque: number;
 }

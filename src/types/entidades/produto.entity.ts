@@ -17,6 +17,6 @@ export class Produto {
   @Column({ type: 'text' })
   descricao: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  urlImagem: string;
+  @Column({ type: 'decimal' })
+  quantidade_estoque: number;
 }
