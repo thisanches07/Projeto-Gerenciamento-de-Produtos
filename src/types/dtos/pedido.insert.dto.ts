@@ -3,23 +3,26 @@ import {
   IsArray,
   IsInt,
   IsNotEmpty,
+  IsPositive,
   IsString,
   ValidateNested,
 } from 'class-validator';
 
-class ProdutoEQuantidade {
+export class ProdutoQuantidadeDto {
   @IsString({ message: 'nome do produto deve ser uma string' })
   @IsNotEmpty({ message: 'nome do produto é obrigatório' })
   nome: string;
 
-  @IsNotEmpty({ message: 'quantidade do produto é obrigatória' })
-  @IsInt({ message: 'quantidade do produto deve ser um número inteiro.' })
+  @IsInt({ message: 'Quantidade deve ser um número inteiro' })
+  @IsPositive({ message: 'Quantidade deve ser maior que zero' })
+  @IsNotEmpty({ message: 'Quantidade é obrigatória' })
   quantidade: number;
 }
+
 export class CriarPedidoDto {
   @IsArray({ message: 'Produtos deve ser um array.' })
   @ValidateNested({ each: true })
-  @Type(() => ProdutoEQuantidade)
-  @IsNotEmpty({ message: 'Produtos não pode estar vazio.' })
-  produtos: ProdutoEQuantidade[];
+  @Type(() => ProdutoQuantidadeDto)
+  @IsNotEmpty({ message: 'A lista de produtos não pode estar vazia' })
+  produtos: ProdutoQuantidadeDto[];
 }

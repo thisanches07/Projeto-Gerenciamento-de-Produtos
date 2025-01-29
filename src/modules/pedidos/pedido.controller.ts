@@ -13,7 +13,7 @@ export class PedidoController {
   }
 
   @Post()
-  criarPedido(@Body() data: CriarPedidoDto): string {
-    return this.service.criarPedido(data);
+  async criarPedido(@Body() data: CriarPedidoDto): Promise<PedidoResponseDto> {
+    return await this.service.criarPedido(data);
   }
 }
