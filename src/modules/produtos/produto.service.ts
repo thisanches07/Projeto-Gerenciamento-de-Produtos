@@ -1,14 +1,14 @@
+import { CriarProdutoDto } from '@app/types/dtos/produto.insert.dto';
+import { ProdutoResponseDto } from '@app/types/dtos/produto.response.dto';
+import { EditarProdutoDto } from '@app/types/dtos/produto.update.dto';
+import { Produto } from '@app/types/entidades/produto.entity';
+import { ProdutoAssembler } from '@modules/produtos/assembler/produto-assembler';
 import {
   BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProdutoAssembler } from 'src/modules/produtos/assembler/produto-assembler';
-import { CriarProdutoDto } from 'src/types/dtos/produto.insert.dto';
-import { ProdutoResponseDto } from 'src/types/dtos/produto.response.dto';
-import { EditarProdutoDto } from 'src/types/dtos/produto.update.dto';
-import { Produto } from 'src/types/entidades/produto.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
