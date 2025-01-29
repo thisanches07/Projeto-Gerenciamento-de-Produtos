@@ -36,13 +36,13 @@ export class ProdutoService {
     id: string,
     data: EditarProdutoDto,
   ): Promise<ProdutoResponseDto> {
-    await this.getProdutoById(id);
+    await this.listarProdutoById(id);
     await this.produtoRepository.update(id, data);
-    const produtoAtualizado = await this.getProdutoById(id);
+    const produtoAtualizado = await this.listarProdutoById(id);
     return ProdutoAssembler.assembleProdutoResponse(produtoAtualizado);
   }
 
-  private async getProdutoById(id: string): Promise<Produto> {
+  private async listarProdutoById(id: string): Promise<Produto> {
     const produto = await this.produtoRepository.findOne({
       where: { id: parseInt(id) },
     });
@@ -52,10 +52,34 @@ export class ProdutoService {
     return produto;
   }
 
+  async listarProdutoByNome(nome: string): Promise<ProdutoResponseDto> {
+    const produto = await this.produtoRepository.findOne({
+      where: { nome },
+    });
+    if (!produto) {
+      throw new NotFoundException('Produto não encontrado');
+    }
+    return ProdutoAssembler.assembleProdutoResponse(produto);
+  }
+
+  async atualizarQuantidadeDeProdutoPedido(
+    produto: Produto,
+    quantidade: number,
+  ) {
+    if (produto.quantidade_estoque < quantidade) {
+      throw new NotFoundException(
+        `O produto ${produto.nome} possui apenas ${produto.quantidade_estoque} em estoque. Quantidade ${quantidade} inválida! `,
+      );
+    }
+    await this.produtoRepository.update(produto.id, {
+      quantidade_estoque: () => `quantidade_estoque - ${quantidade}`,
+    });
+  }
+
   async deletarProduto(
     id: string,
   ): Promise<{ sucesso: boolean; message: string }> {
-    await this.getProdutoById(id);
+    await this.listarProdutoById(id);
     const { affected } = await this.produtoRepository.delete(id);
 
     return affected > 0
