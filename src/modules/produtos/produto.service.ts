@@ -23,6 +23,12 @@ export class ProdutoService {
   }
 
   async criarProduto(data: CriarProdutoDto): Promise<ProdutoResponseDto> {
+    const produtoExistente = await this.produtoRepository.findOne({
+      where: { nome: data.nome },
+    });
+    if (produtoExistente) {
+      throw new BadRequestException(`Produto '${data.nome}' já existe.`);
+    }
     const produto = await this.produtoRepository.create(data);
     const produtoSalvo = await this.produtoRepository.save(produto);
     if (!produtoSalvo) {
