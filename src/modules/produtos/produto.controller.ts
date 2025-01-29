@@ -10,18 +10,29 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ProdutoService } from './produto.service';
 
+@ApiTags('Produtos')
 @Controller('produtos')
 export class ProdutoController {
   constructor(private readonly service: ProdutoService) {}
 
   @Get()
+  @ApiOkResponse({
+    description: 'Lista de produtos retornada',
+    type: [ProdutoResponseDto],
+  })
   async listarProdutos(): Promise<ProdutoResponseDto[]> {
     return await this.service.listarProdutos();
   }
 
   @Post()
+  @ApiBody({ type: CriarProdutoDto })
+  @ApiOkResponse({
+    description: 'Produto criado',
+    type: ProdutoResponseDto,
+  })
   async criarProduto(
     @Body() data: CriarProdutoDto,
   ): Promise<ProdutoResponseDto> {
@@ -29,6 +40,11 @@ export class ProdutoController {
   }
 
   @Patch('/:id')
+  @ApiBody({ type: CriarProdutoDto })
+  @ApiOkResponse({
+    description: 'Produto editado',
+    type: ProdutoResponseDto,
+  })
   async editarProduto(
     @Param('id') id: string,
     @Body() data: EditarProdutoDto,
@@ -37,6 +53,9 @@ export class ProdutoController {
   }
 
   @Delete('/:id')
+  @ApiOkResponse({
+    description: 'Produto deletado',
+  })
   async deletarProduto(
     @Param('id') id: string,
   ): Promise<{ sucesso: boolean; message: string }> {

@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsArray,
@@ -11,11 +12,17 @@ import {
 export class ProdutoQuantidadeDto {
   @IsString({ message: 'nome do produto deve ser uma string' })
   @IsNotEmpty({ message: 'nome do produto é obrigatório' })
+  @ApiProperty({
+    example: 'Produto 1',
+  })
   nome: string;
 
   @IsInt({ message: 'Quantidade deve ser um número inteiro' })
   @IsPositive({ message: 'Quantidade deve ser maior que zero' })
   @IsNotEmpty({ message: 'Quantidade é obrigatória' })
+  @ApiProperty({
+    example: 10,
+  })
   quantidade: number;
 }
 
@@ -24,5 +31,8 @@ export class CriarPedidoDto {
   @ValidateNested({ each: true })
   @Type(() => ProdutoQuantidadeDto)
   @IsNotEmpty({ message: 'A lista de produtos não pode estar vazia' })
+  @ApiProperty({
+    type: [ProdutoQuantidadeDto],
+  })
   produtos: ProdutoQuantidadeDto[];
 }
