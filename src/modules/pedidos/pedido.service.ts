@@ -36,6 +36,11 @@ export class PedidoService {
       where: { id: parseInt(id) },
       relations: ['produtos', 'produtos.produto'],
     });
+
+    if (!pedido) {
+      throw new NotFoundException('Pedido não encontrado');
+    }
+
     return PedidoAssembler.assemblePedidoResponse(pedido);
   }
 
