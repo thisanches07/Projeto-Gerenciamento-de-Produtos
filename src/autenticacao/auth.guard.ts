@@ -29,7 +29,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(err, user, info) {
     if (err || !user) {
-      throw new UnauthorizedException('Token inválido ou ausente.');
+      throw new UnauthorizedException(
+        'Token inválido ou ausente. Acesse a rota /login para pegar o seu token',
+      );
     }
     return user;
   }
