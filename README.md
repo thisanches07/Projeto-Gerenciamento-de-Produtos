@@ -22,21 +22,23 @@ Antes de rodar a aplicação, é necessário ter os seguintes programas instalad
   Para executar o projeto, é necessário ter o PostgreSQL e o Node.js instalados. Siga o passo a passo abaixo para configurá-lo corretamente:
   ### 1. Clonar o repositório
   ```bash
-    $ git clone <url-do-repositorio>
+    git clone <url-do-repositorio>
   ```
   ### 2. Instalar dependências
   Instale as dependências necessárias usando o npm:
   ```bash
-    $ npm install
+    npm install
   ```
    ### 3. Configurar o arquivo .env
    Copie o conteúdo do arquivo .env-example e crie um novo arquivo na raiz do projeto chamado .env com o conteúdo copiado. Caso preferir, rode o seguinte comando no terminal (cmd): 
   ```bash
-    $ copy .env-example .env
+    copy .env-example .env
   ```
   ### 4. Rodar a API
+  - Para rodar a API localmente, certifique-se que a variável DB_HOST esteja da seguinte forma: **DB_HOST=localhost**
+    Rode o comando:
   ```bash
-    $ npm run start:dev
+    npm run start:dev
   ```
 A API estará disponível em [http://localhost:3000](http://localhost:3000)
 
@@ -44,11 +46,11 @@ A API estará disponível em [http://localhost:3000](http://localhost:3000)
 Se você preferir rodar a aplicação utilizando containers Docker, siga os passos abaixo
  ### 1. Clonar o repositório
   ```bash
-    $ git clone <url-do-repositorio>
+    git clone <url-do-repositorio>
   ```
  ### 2. Rodar os containers 
   ```bash
-    $ docker-compose up -d
+    docker-compose up -d
   ```
 Este comando irá:
 
@@ -64,7 +66,7 @@ A aplicação estará disponível em [http://localhost:3000](http://localhost:30
 
 # Rodar testes
 ```bash
-$ npm run test
+  npm run test
 ```
 
 # Swagger
