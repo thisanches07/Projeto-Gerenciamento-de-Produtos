@@ -16,7 +16,7 @@ Antes de rodar a aplicação, é necessário ter os seguintes programas instalad
 
 - **PostgreSQL**: Para armazenar os dados do projeto.
 - **Node.js**: Para rodar a aplicação.
-- **Docker** (opcional, caso queira rodar com containers).
+- **Docker** (opcional, caso queira rodar com contêineres).
   
 # Como rodar a API local?
   Para executar o projeto, é necessário ter o PostgreSQL e o Node.js instalados. Siga o passo a passo abaixo para configurá-lo corretamente:
@@ -43,12 +43,12 @@ Antes de rodar a aplicação, é necessário ter os seguintes programas instalad
 A API estará disponível em [http://localhost:3000](http://localhost:3000)
 
 # Como rodar a API pelo Docker?
-Se você preferir rodar a aplicação utilizando containers Docker, siga os passos abaixo
+Se você preferir rodar a aplicação utilizando contêineres Docker, siga os passos abaixo
  ### 1. Clonar o repositório
   ```bash
     git clone <url-do-repositorio>
   ```
- ### 2. Rodar os containers 
+ ### 2. Rodar os contêineres 
  Para rodar a API via Docker, é necerrário alterar a variável DB_HOST para **DB_HOST=postgres**.
  Rode o comando:
   ```bash
@@ -56,10 +56,11 @@ Se você preferir rodar a aplicação utilizando containers Docker, siga os pass
   ```
 Este comando irá:
 
-Criar e iniciar dois containers:
-Um para o PostgreSQL.
-Um para a aplicação NestJS.
-A aplicação estará disponível em [http://localhost:3000](http://localhost:3000) quando os containers estiverem rodando.
+Criar e iniciar dois contêineres:
+- Um para o PostgreSQL.
+- Um para a aplicação NestJS.
+
+A aplicação estará disponível em [http://localhost:3000](http://localhost:3000) quando os contêineres estiverem rodando.
 
 ## Importante
 - Na raiz do projeto, você encontrará um arquivo chamado ```export_de_requisicoes.json```. Esse arquivo pode ser importado em plataformas de desenvolvimento e teste de APIs, como Postman ou Insomnia, para facilitar a interação com as rotas da aplicação.
