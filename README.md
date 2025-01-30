@@ -19,7 +19,7 @@ Antes de rodar a aplicação, é necessário ter os seguintes programas instalad
 - **Docker** (opcional, caso queira rodar com containers).
   
 # Como rodar a API local?
-  Para rodar o projeto é preciso ter o postgres e o nodeJS instalados e seguir o passo-a-passo:
+  Para executar o projeto, é necessário ter o PostgreSQL e o Node.js instalados. Siga o passo a passo abaixo para configurá-lo corretamente:
   ### 1. Clonar o repositório
   ```bash
     $ git clone <url-do-repositorio>
