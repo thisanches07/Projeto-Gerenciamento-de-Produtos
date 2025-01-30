@@ -49,7 +49,7 @@ describe('ProdutoService', () => {
     expect(mockProdutoRepository.find).toHaveBeenCalled();
   });
 
-  it('deve criar um produto', async () => {
+  it('Deve criar um produto', async () => {
     const novoProduto: CriarProdutoDto = {
       nome: 'Produto Teste',
       categoria: 'Categoria Teste',
