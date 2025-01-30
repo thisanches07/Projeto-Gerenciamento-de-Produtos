@@ -49,6 +49,8 @@ Se você preferir rodar a aplicação utilizando containers Docker, siga os pass
     git clone <url-do-repositorio>
   ```
  ### 2. Rodar os containers 
+ Para rodar a API via Docker, é necerrário alterar a variável DB_HOST para **DB_HOST=postgres**.
+ Rode o comando:
   ```bash
     docker-compose up -d
   ```
@@ -60,8 +62,6 @@ Um para a aplicação NestJS.
 A aplicação estará disponível em [http://localhost:3000](http://localhost:3000) quando os containers estiverem rodando.
 
 ## Importante
-- Para rodar a API localmente, é necessário alterar a variável DB_HOST para **DB_HOST=localhost**
-- Para rodar a API via Docker, é necerrário alterar a variável DB_HOST para **DB_HOST=postgres**
 - Na raiz do projeto, você encontrará um arquivo chamado ```export_de_requisicoes.json```. Esse arquivo pode ser importado em plataformas de desenvolvimento e teste de APIs, como Postman ou Insomnia, para facilitar a interação com as rotas da aplicação.
 
 # Rodar testes
