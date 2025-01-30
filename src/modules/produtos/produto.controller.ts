@@ -10,10 +10,16 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ProdutoService } from './produto.service';
 
 @ApiTags('Produtos')
+@ApiBearerAuth()
 @Controller('produtos')
 export class ProdutoController {
   constructor(private readonly service: ProdutoService) {}

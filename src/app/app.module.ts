@@ -10,9 +10,9 @@ const ormconfig = require('../../ormconfig.js');
 @Module({
   imports: [
     TypeOrmModule.forRoot(ormconfig),
+    AuthModule,
     ProdutoModule,
     PedidoModule,
-    AuthModule,
   ],
   providers: [
     {

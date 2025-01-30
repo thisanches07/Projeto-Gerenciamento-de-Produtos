@@ -8,7 +8,7 @@ export class AuthService {
   generateToken() {
     const payload = { sub: 'fake-id' };
     return {
-      access_token: this.jwtService.sign(payload),
+      token_de_acesso: this.jwtService.sign(payload),
     };
   }
 }

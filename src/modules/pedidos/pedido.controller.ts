@@ -2,8 +2,15 @@ import { CriarPedidoDto } from '@app/types/dtos/pedido.insert.dto';
 import { PedidoResponseDto } from '@app/types/dtos/pedido.response.dto';
 import { PedidoService } from '@modules/pedidos/pedido.service';
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiTags('Pedidos')
+@ApiBearerAuth()
 @Controller('pedidos')
 export class PedidoController {
   constructor(private readonly service: PedidoService) {}
